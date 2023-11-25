@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapi-deployment
+  labels:
+    app: webapi
+    env: dev-deployment
+spec:
+  template:
+    metadata:
+      name: webapi-test
+      labels:
+        app: dev-app
+        name: go-api
+    spec:
+      containers:
+        - name: go-api-pod
+          image: alhazmy20/go-webapi:latest
+          ports:
+            - containerPort: 5000
+  replicas: 3
+  selector:
+    matchLabels:
+      name: go-api
